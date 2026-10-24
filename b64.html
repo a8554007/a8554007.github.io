@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+    <META HTTP-EQUIV="EXPIRES" CONTENT="0">
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <meta charset="utf-8" />
+    <title>base64 to PDF</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+</head>
+
+<body>
+  <h1>base64 to pdf downloader</h1>
+  <input type="file" id="file-input" />
+</body>
+
+<script type="text/javascript">
+function readSingleFile(e) {
+  var file = e.target.files[0];
+  if (!file) {
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var contents = e.target.result;
+    decodePDF(contents);
+  };
+  reader.readAsText(file);
+}
+document.getElementById('file-input')
+  .addEventListener('change', readSingleFile, false);
+
+// online decoding base64 string to PDF
+// https://products.aspose.app/pdf/conversion/base64-to-pdf
+// https://base64.guru/converter/decode/pdf
+
+// base64 of PDF starts with "JVBER"
+// The Base64 string of a simple PDF file
+
+function decodePDF(b64) {
+  //var b64="";
+
+  if (b64 == "") return;
+  // Decode Base64 to binary and show some information about the PDF file (note that I skipped all checks)
+  var bin = atob(b64);
+  console.log('File Size:', Math.round(bin.length / 1024), 'KB');
+  console.log('PDF Version:', bin.match(/^.PDF-([0-9.]+)/)[1]);
+  //console.log('Create Date:', bin.match(/<xmp:CreateDate>(.+?)<\/xmp:CreateDate>/)[1]);
+  //console.log('Modify Date:', bin.match(/<xmp:ModifyDate>(.+?)<\/xmp:ModifyDate>/)[1]);
+  //console.log('Creator Tool:', bin.match(/<xmp:CreatorTool>(.+?)<\/xmp:CreatorTool>/)[1]);
+
+  // Embed the PDF into the HTML page and show it to the user
+  var obj = document.createElement('object');
+  obj.style.width = '100%';
+  obj.style.height = '500pt';
+  obj.type = 'application/pdf';
+  obj.data = 'data:application/pdf;base64,' + b64;
+  document.body.appendChild(obj);
+
+  // Insert a link that allows the user to download the PDF file
+  var link = document.createElement('a');
+  link.innerHTML = 'Download PDF file (密碼:身份證字號)';
+  link.download = 'file.pdf';
+  link.href = 'data:application/octet-stream;base64,' + b64;
+  document.body.appendChild(link);
+}
+
+</script>
+
+</html>
