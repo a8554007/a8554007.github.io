@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高資產客戶專屬 保費融資 講義</title>
+<style>
+:root{
+  --red:#C62828; --blue:#1F5FA8; --green:#1E6B45; --yellow:#F2B705; --amber:#8A6100;
+  --ink:#1F2933; --muted:#5B6670; --line:#E3E8ED; --surface:#F4F6F8; --bg:#FFFFFF;
+  --warn:#FFF6D6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC","Heiti TC",sans-serif;line-height:1.7;font-size:17px}
+a{color:var(--blue)}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+nav .wrap{display:flex;gap:4px;overflow-x:auto;padding:8px 20px}
+nav a{flex:none;text-decoration:none;color:var(--muted);font-size:15px;padding:6px 14px;border-radius:999px;font-weight:600}
+nav a:hover{background:var(--surface);color:var(--ink)}
+nav a.on{background:var(--blue);color:#fff}
+
+/* hero */
+header.hero{padding:56px 0 36px}
+.hero small{color:var(--muted);font-size:15px;letter-spacing:.04em}
+.hero h1{margin:8px 0 6px;font-size:clamp(30px,6vw,48px);line-height:1.25;color:var(--blue)}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero p{margin:0;color:var(--muted);max-width:36em}
+.dots{display:flex;gap:8px;margin-top:22px}
+.dots i{width:14px;height:14px;border-radius:50%;display:block}
+
+section{padding:44px 0 8px}
+h2{display:flex;align-items:center;gap:12px;font-size:26px;margin:0 0 6px}
+.lead{color:var(--muted);margin:0 0 22px}
+.ico{flex:none;display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;color:#fff}
+.ico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.c-blue{background:var(--blue)} .c-red{background:var(--red)} .c-green{background:var(--green)} .c-yellow{background:var(--yellow);color:var(--ink)}
+.t-blue{color:var(--blue)} .t-red{color:var(--red)} .t-green{color:var(--green)} .t-yellow{color:var(--amber)}
+
+/* tabs */
+.tabs{display:inline-flex;background:var(--surface);border-radius:999px;padding:4px;margin-bottom:20px}
+.tabs button{border:0;background:none;font:inherit;font-weight:700;padding:8px 22px;border-radius:999px;cursor:pointer;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.col h3{display:flex;align-items:center;gap:10px;font-size:20px;margin:0 0 12px}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.step{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border-radius:12px;padding:14px;cursor:pointer;border:2px solid transparent;text-align:left;font:inherit;color:inherit;width:100%}
+.step:hover{border-color:var(--line)}
+.step[aria-pressed="true"]{border-color:currentColor;background:#fff}
+.step .n{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800}
+.step .tx{flex:1}
+.step .tx small{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+.step .done{margin-left:auto;font-size:13px;color:var(--muted)}
+.step.checked .tx > span{text-decoration:line-through;text-decoration-color:var(--line)}
+.hint{font-size:14px;color:var(--muted);margin-top:10px}
+
+/* highlights */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--surface);border-radius:16px;padding:20px;text-align:center;border:0;font:inherit;color:inherit;cursor:pointer}
+.card:hover{box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.card .ico{width:52px;height:52px;margin-bottom:8px}
+.card .big{display:block;font-size:38px;font-weight:800;line-height:1.2}
+.card .lab{display:block;color:var(--muted);font-size:15px}
+.card .val{display:block;font-weight:700;margin-top:2px}
+.card .more{display:none;margin-top:10px;font-size:15px;color:var(--ink);background:#fff;border-radius:10px;padding:10px;text-align:left}
+.card[aria-expanded="true"] .more{display:block}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;align-items:start}
+.cards{align-items:start}
+.note{display:flex;gap:14px;align-items:center;background:var(--surface);border-radius:16px;padding:16px;text-align:left;border:0;font:inherit;color:inherit;cursor:pointer;flex-wrap:wrap}
+.note .body{flex:1;min-width:0}
+.note b{display:block;font-size:14px;color:var(--muted)}
+.note .more{display:none;width:100%;font-size:15px;background:#fff;border-radius:10px;padding:10px}
+.note[aria-expanded="true"] .more{display:block}
+
+/* rate */
+.formula{display:grid;grid-template-columns:2fr auto 1fr auto 1.2fr;gap:12px;align-items:stretch}
+.fbox{background:var(--surface);border-radius:16px;padding:18px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;justify-content:center}
+.fbox .ico{width:44px;height:44px}
+.fbox .v{font-size:30px;font-weight:800;line-height:1.1}
+.fbox small{color:var(--muted)}
+.fbox.res{background:var(--green);color:#fff}
+.fbox.res small{color:#E6F2EA}
+.fbox.res .ico{background:#fff;color:var(--green)}
+.op{display:grid;place-items:center;font-size:30px;font-weight:800;color:var(--muted)}
+.warn{display:flex;gap:12px;align-items:center;background:var(--warn);border-radius:14px;padding:14px 16px;margin-top:16px}
+.sliders{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+label.rng{display:block;font-weight:700;font-size:15px}
+label.rng span.val{float:right;color:var(--blue)}
+input[type=range]{width:100%;accent-color:var(--blue)}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:1fr 1.1fr;gap:20px}
+.panel{background:var(--surface);border-radius:16px;padding:20px}
+.field{margin-bottom:16px}
+.field > b{display:block;font-size:15px;margin-bottom:6px}
+input[type=number]{width:100%;font:inherit;font-size:20px;font-weight:700;padding:10px 12px;border:2px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+input[type=number]:focus{outline:none;border-color:var(--blue)}
+.seg{display:flex;gap:8px}
+.seg button{flex:1;font:inherit;font-weight:700;padding:10px;border:2px solid var(--line);background:#fff;border-radius:10px;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{border-color:var(--blue);color:var(--blue);background:#EAF1FA}
+.out{display:grid;gap:10px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;background:#fff;border-radius:12px;padding:12px 14px}
+.row span{color:var(--muted);font-size:15px}
+.row strong{font-size:22px}
+.row.main strong{color:var(--green);font-size:28px}
+.bar{height:14px;border-radius:7px;background:#fff;overflow:hidden;display:flex}
+.bar i{display:block;height:100%;transition:width .3s}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--muted);margin-top:6px;flex-wrap:wrap}
+.legend b{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.fine{font-size:13px;color:var(--muted);margin-top:12px}
+
+/* quiz */
+.q{background:var(--surface);border-radius:16px;padding:18px;margin-bottom:14px}
+.q h4{margin:0 0 10px;font-size:17px}
+.opts{display:grid;gap:8px}
+.opts button{font:inherit;text-align:left;padding:10px 14px;border:2px solid var(--line);background:#fff;border-radius:10px;cursor:pointer}
+.opts button{color:var(--ink)}
+.opts button:disabled{color:var(--ink);cursor:default;opacity:1}
+.opts button:disabled:not(.ok):not(.no){color:var(--muted)}
+.opts button:hover:not(:disabled){border-color:var(--blue)}
+.opts button.ok{border-color:var(--green);background:#E8F3EC}
+.opts button.no{border-color:var(--red);background:#FBEAEA}
+.fb{margin-top:8px;font-size:15px;min-height:1.4em}
+.score{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.score .pill{background:var(--blue);color:#fff;border-radius:999px;padding:6px 18px;font-weight:800;font-size:20px}
+.btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:9px 20px;background:var(--ink);color:#fff;cursor:pointer}
+
+footer{margin:48px 0 60px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+
+@media (max-width:720px){
+  .cols,.calc,.sliders,.pair{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .formula{grid-template-columns:1fr}
+  .op{font-size:24px;padding:0}
+}
+@media print{
+  nav,.tabs,.btn{display:none}
+  .cols{grid-template-columns:1fr 1fr}
+  .card .more,.note .more{display:block}
+  section{break-inside:avoid;padding-top:24px}
+}
+</style>
+</head>
+<body>
+
+<nav aria-label="章節">
+  <div class="wrap">
+    <a href="#concept">概念</a>
+    <a href="#product">商品重點</a>
+    <a href="#rate">利率</a>
+    <a href="#calc">試算</a>
+    <a href="#quiz">小測驗</a>
+  </div>
+</nav>
+
+<main class="wrap">
+<header class="hero">
+  <small>115.11.02</small>
+  <h1>高資產客戶專屬<br><em>保費融資</em></h1>
+  <p>用「買房、賣房」來理解「買保單、解約」。點選步驟、展開卡片、調整數字，就能自己玩一遍。</p>
+  <div class="dots" aria-hidden="true"><i style="background:var(--red)"></i><i style="background:var(--blue)"></i><i style="background:var(--green)"></i><i style="background:var(--yellow)"></i></div>
+</header>
+
+<!-- 概念 -->
+<section id="concept">
+  <h2><span class="ico c-blue" data-i="home"></span>概念：用買房來理解</h2>
+  <p class="lead">左邊是大家熟悉的房貸，右邊是保費融資，流程幾乎一一對應。點步驟可以打勾，邊聽邊追蹤進度。</p>
+  <div class="tabs" role="tablist" aria-label="買或賣">
+    <button role="tab" id="tab-buy" aria-selected="true">買（進場）</button>
+    <button role="tab" id="tab-sell" aria-selected="false">賣（出場）</button>
+  </div>
+  <div class="cols">
+    <div class="col"><h3 id="hL"></h3><ol class="steps" id="listL"></ol></div>
+    <div class="col"><h3 id="hR"></h3><ol class="steps" id="listR"></ol></div>
+  </div>
+  <p class="hint">提示：點選步驟可標記「已講解」，切換買／賣時進度會保留。</p>
+</section>
+
+<!-- 商品重點 -->
+<section id="product">
+  <h2><span class="ico c-green" data-i="shield"></span>商品重點</h2>
+  <p class="lead">點任一張卡片，看範例說明。</p>
+  <div class="cards">
+    <button class="card" aria-expanded="false">
+      <span class="ico c-blue" data-i="chart"></span>
+      <span class="big t-blue">80%</span>
+      <span class="lab">可融資金額</span>
+      <span class="val">首日保單解約金的 80%</span>
+      <span class="more">範例：首日解約金 500 萬 → 可融資 400 萬（台幣保單）。</span>
+    </button>
+    <button class="card" aria-expanded="false">
+      <span class="ico c-red" data-i="percent"></span>
+      <span class="big t-red">2.75%</span>
+      <span class="lab">融資利率</span>
+      <span class="val">最長 7 年</span>
+      <span class="more">目前（115.11.01 起）利率為 2.75%，會隨基準利率及加碼利率浮動，詳見「利率」章節。</span>
+    </button>
+    <button class="card" aria-expanded="false">
+      <span class="ico c-green" data-i="coins"></span>
+      <span class="big t-green">300萬+</span>
+      <span class="lab">承作金額</span>
+      <span class="val">至少 300 萬以上</span>
+      <span class="more">承作金額須達 300 萬以上才能申辦。</span>
+    </button>
+  </div>
+  <div class="pair">
+    <button class="note" aria-expanded="false">
+      <span class="ico c-yellow" data-i="bolt"></span>
+      <span class="body"><b>動用方式</b>限一次動用並支付保費</span>
+      <span class="more">融資款項一次動用，用於支付保費。</span>
+    </button>
+    <button class="note" aria-expanded="false">
+      <span class="ico c-red" data-i="dollar"></span>
+      <span class="body"><b>投保美元保單</b>因貸款為台幣，融資金額會再打 9 折</span>
+      <span class="more">範例：首日解約金 500 萬 → 500 × 80% × 90% = 360 萬。</span>
+    </button>
+  </div>
+</section>
+
+<!-- 利率 -->
+<section id="rate">
+  <h2><span class="ico c-red" data-i="percent"></span>融資利率如何計算</h2>
+  <p class="lead">融資利率 = 北富銀牌告指數型房貸基準利率 + 加碼利率，兩者皆會浮動。拖曳下方滑桿，看看利率變動的影響。</p>
+  <div class="formula">
+    <div class="fbox"><span class="ico c-blue" data-i="bank"></span><b>北富銀牌告指數型<br>房貸基準利率</b><span class="v t-blue" id="vBase">1.71%</span><small>會浮動</small></div>
+    <div class="op" aria-hidden="true">+</div>
+    <div class="fbox"><span class="ico c-red" data-i="percent"></span><b>加碼利率</b><span class="v t-red" id="vAdd">1.04%</span><small>會浮動</small></div>
+    <div class="op" aria-hidden="true">=</div>
+    <div class="fbox res"><span class="ico" data-i="check"></span><b>融資利率</b><span class="v" id="vRate">2.75%</span><small id="vRateNote">目前（115.11.01 起）</small></div>
+  </div>
+  <div class="sliders">
+    <label class="rng">基準利率 <span class="val" id="lbBase"></span>
+      <input type="range" id="sBase" min="0.5" max="4" step="0.01" value="1.71"></label>
+    <label class="rng">加碼利率 <span class="val" id="lbAdd"></span>
+      <input type="range" id="sAdd" min="0.5" max="3" step="0.01" value="1.04"></label>
+  </div>
+  <p class="fine">基準利率預設值 1.71% 為由目前利率 2.75% 減加碼 1.04% 推算，僅供示意，實際請以銀行公告為準。</p>
+  <div class="warn"><span class="ico c-yellow" data-i="alert"></span><span>利率會浮動，試算結果僅供參考。<a href="https://www.fubon.com/banking/Personal/mortgage/home_loan/home_loan.htm" target="_blank" rel="noopener">北富銀官網</a></span></div>
+</section>
+
+<!-- 試算 -->
+<section id="calc">
+  <h2><span class="ico c-green" data-i="coins"></span>融資試算器</h2>
+  <p class="lead">輸入首日保單解約金，看看大概可以融資多少、利息約多少。</p>
+  <div class="calc">
+    <div class="panel">
+      <div class="field"><b>首日保單解約金（萬元）</b><input type="number" id="inCV" value="500" min="0" step="10" inputmode="decimal"></div>
+      <div class="field"><b>保單幣別</b>
+        <div class="seg"><button id="curTWD" aria-pressed="true">台幣保單</button><button id="curUSD" aria-pressed="false">美元保單（×90%）</button></div></div>
+      <div class="field"><label class="rng">借款年期 <span class="val" id="lbYears"></span>
+        <input type="range" id="sYears" min="1" max="7" step="1" value="7"></label></div>
+      <p class="fine" style="margin:0">融資利率沿用上方設定：<b id="usedRate"></b></p>
+    </div>
+    <div class="panel out" aria-live="polite">
+      <div class="row main"><span>可融資金額</span><strong id="oLoan">—</strong></div>
+      <div class="row"><span>自備款（解約金 − 融資）</span><strong id="oOwn">—</strong></div>
+      <div class="row"><span>每年利息</span><strong id="oYear">—</strong></div>
+      <div class="row"><span>每月利息</span><strong id="oMonth">—</strong></div>
+      <div class="row"><span>累計利息（<span id="oYrs"></span> 年）</span><strong id="oTotal">—</strong></div>
+      <div>
+        <div class="bar" aria-hidden="true"><i id="barLoan" style="background:var(--green)"></i><i id="barOwn" style="background:var(--yellow)"></i></div>
+        <div class="legend"><span><b style="background:var(--green)"></b>可融資</span><span><b style="background:var(--yellow)"></b>其餘</span></div>
+      </div>
+      <p class="fine" style="margin:0">示意試算：利息以「融資金額 × 利率」估算，不含本金償還方式與費用。實際金額以銀行核定為準；承作金額須至少 300 萬以上。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 測驗 -->
+<section id="quiz">
+  <h2><span class="ico c-yellow" data-i="check"></span>小測驗</h2>
+  <p class="lead">聽完之後，檢查自己抓到幾個重點。</p>
+  <div id="quizBox"></div>
+  <div class="score"><span class="pill" id="score">0 / 5</span><button class="btn" id="reset">重新作答</button></div>
+</section>
+
+<footer>資料來源：「高資產客戶專屬 保費融資」簡報（115.11.02）。本講義僅供說明概念，不構成任何保險或融資承諾，實際條件以保險公司及銀行規定為準。</footer>
+</main>
+
+<script>
+const ICONS = {
+  home:'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+  shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  bank:'<path d="M3 21h18M5 21V10M9 21V10M15 21V10M19 21V10M2 10l10-7 10 7z"/>',
+  key:'<path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>',
+  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+  file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>',
+  check:'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/>',
+  user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  card:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>',
+  mail:'<path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/>',
+  wallet:'<path d="M20 7H5a2 2 0 0 1 0-4h13v4"/><path d="M3 5v14a2 2 0 0 0 2 2h15V7"/><path d="M16 14h2"/>',
+  chart:'<path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/>',
+  percent:'<path d="M19 5L5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
+  coins:'<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',
+  bolt:'<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
+  dollar:'<path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+  alert:'<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>'
+};
+function svg(name){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+ICONS[name]+'</svg>';}
+document.querySelectorAll('[data-i]').forEach(el=>{el.innerHTML=svg(el.dataset.i);});
+
+/* ---------- 概念：買 / 賣 ---------- */
+const FLOW = {
+  buy:{
+    L:{title:'買房流程',icon:'home',color:'blue',steps:[
+      {t:'先選定房屋（標的）',i:'home'},
+      {t:'向銀行貸款（房貸利率），並準備自備款',i:'bank'},
+      {t:'交屋、對保、撥款給設定抵押',i:'key'}]},
+    R:{title:'買保單流程',icon:'shield',color:'green',steps:[
+      {t:'先選定保單（商品）',i:'shield'},
+      {t:'向銀行辦理高資產客戶身分以申辦保費融資，並提撥自備款',i:'user'},
+      {t:'投保新契約，核保通過後交由銀行撥款給保險公司，完成付款',i:'card'}]}},
+  sell:{
+    L:{title:'賣房流程',icon:'key',color:'red',steps:[
+      {t:'買方支付房價',i:'users'},
+      {t:'繳清房屋交易相關稅款',d:'(土增稅、房地合一稅[新制]/財產交易所得稅[舊制])',i:'file'},
+      {t:'賣房款結清房貸餘額',i:'check'}]},
+    R:{title:'賣保單流程（解約）',icon:'wallet',color:'yellow',steps:[
+      {t:'保險公司收到解約通知',i:'mail'},
+      {t:'保單解約金償還融資銀行',i:'bank'},
+      {t:'剩餘數額再撥款至要保人帳戶',i:'wallet'}]}}
+};
+const checked = {};
+let mode = 'buy';
+function renderFlow(){
+  ['L','R'].forEach(side=>{
+    const f = FLOW[mode][side];
+    const h = document.getElementById('h'+side);
+    h.innerHTML = '<span class="ico c-'+f.color+'">'+svg(f.icon)+'</span><span class="t-'+f.color+'">'+f.title+'</span>';
+    const ol = document.getElementById('list'+side);
+    ol.innerHTML = '';
+    f.steps.forEach((s,idx)=>{
+      const key = mode+side+idx;
+      const li = document.createElement('li');
+      const b = document.createElement('button');
+      b.className = 'step t-'+f.color + (checked[key]?' checked':'');
+      b.setAttribute('aria-pressed', !!checked[key]);
+      b.innerHTML = '<span class="n c-'+f.color+'">'+(idx+1)+'</span><span class="tx"><span style="color:var(--ink)">'+s.t+'</span>'+(s.d?'<small>'+s.d+'</small>':'')+'</span><span class="done">'+(checked[key]?'✓ 已講解':'')+'</span>';
+      b.onclick = ()=>{checked[key]=!checked[key];renderFlow();};
+      li.appendChild(b); ol.appendChild(li);
+    });
+  });
+}
+function setMode(m){
+  mode = m;
+  document.getElementById('tab-buy').setAttribute('aria-selected', m==='buy');
+  document.getElementById('tab-sell').setAttribute('aria-selected', m==='sell');
+  renderFlow();
+}
+document.getElementById('tab-buy').onclick = ()=>setMode('buy');
+document.getElementById('tab-sell').onclick = ()=>setMode('sell');
+renderFlow();
+
+/* ---------- 商品重點展開 ---------- */
+document.querySelectorAll('.card, .note').forEach(el=>{
+  el.onclick = ()=>el.setAttribute('aria-expanded', el.getAttribute('aria-expanded')!=='true');
+});
+
+/* ---------- 利率 + 試算 ---------- */
+const $ = id=>document.getElementById(id);
+let usd = false;
+const fmtPct = n=>n.toFixed(2)+'%';
+const fmtWan = n=>n.toLocaleString('zh-TW',{minimumFractionDigits:2,maximumFractionDigits:2})+' 萬';
+function update(){
+  const base = parseFloat($('sBase').value), add = parseFloat($('sAdd').value);
+  const rate = base + add;
+  $('lbBase').textContent = fmtPct(base); $('lbAdd').textContent = fmtPct(add);
+  $('vBase').textContent = fmtPct(base); $('vAdd').textContent = fmtPct(add); $('vRate').textContent = fmtPct(rate);
+  const isCurrent = Math.abs(base-1.71)<0.005 && Math.abs(add-1.04)<0.005;
+  $('vRateNote').textContent = isCurrent ? '目前（115.11.01 起）' : '試算情境';
+  $('usedRate').textContent = fmtPct(rate);
+
+  const years = parseInt($('sYears').value,10);
+  $('lbYears').textContent = years+' 年'; $('oYrs').textContent = years;
+  const cv = Math.max(0, parseFloat($('inCV').value)||0);
+  const loan = cv*0.8*(usd?0.9:1);
+  const yearInt = loan*rate/100;
+  $('oLoan').textContent = fmtWan(loan);
+  $('oOwn').textContent = fmtWan(cv-loan);
+  $('oYear').textContent = fmtWan(yearInt);
+  $('oMonth').textContent = fmtWan(yearInt/12);
+  $('oTotal').textContent = fmtWan(yearInt*years);
+  const p = cv>0 ? loan/cv*100 : 0;
+  $('barLoan').style.width = p+'%'; $('barOwn').style.width = (cv>0?100-p:0)+'%';
+}
+['sBase','sAdd','sYears','inCV'].forEach(id=>$(id).addEventListener('input',update));
+function setCur(u){usd=u;$('curTWD').setAttribute('aria-pressed',!u);$('curUSD').setAttribute('aria-pressed',u);update();}
+$('curTWD').onclick=()=>setCur(false); $('curUSD').onclick=()=>setCur(true);
+update();
+
+/* ---------- 小測驗 ---------- */
+const QUIZ = [
+  {q:'可融資金額為何？',o:['保費的 80%','首日保單解約金的 80%','保額的 80%'],a:1,e:'可融資金額為首日保單解約金的 80%。'},
+  {q:'融資利率的組成是？',o:['固定利率','北富銀牌告指數型房貸基準利率 + 加碼利率','只看加碼利率'],a:1,e:'兩者皆會浮動，目前（115.11.01 起）為 2.75%。'},
+  {q:'投保美元保單時，融資金額會？',o:['不變','再打 9 折','再加成 10%'],a:1,e:'因貸款為台幣，融資金額會再打 9 折。'},
+  {q:'融資款項的動用方式是？',o:['可分次動用','限一次動用並支付保費','依需求隨時動用'],a:1,e:'限一次動用並支付保費。'},
+  {q:'保費融資最長可借幾年？',o:['3 年','7 年','30 年'],a:1,e:'最長 7 年（30 年是房貸的期限，別搞混）。'}
+];
+let score = 0, answered = 0;
+function renderQuiz(){
+  score = 0; answered = 0; $('score').textContent = '0 / '+QUIZ.length;
+  const box = $('quizBox'); box.innerHTML = '';
+  QUIZ.forEach((it,qi)=>{
+    const d = document.createElement('div'); d.className = 'q';
+    d.innerHTML = '<h4>Q'+(qi+1)+'. '+it.q+'</h4><div class="opts"></div><div class="fb" aria-live="polite"></div>';
+    const opts = d.querySelector('.opts'), fb = d.querySelector('.fb');
+    it.o.forEach((txt,oi)=>{
+      const b = document.createElement('button'); b.textContent = txt;
+      b.onclick = ()=>{
+        opts.querySelectorAll('button').forEach((x,xi)=>{x.disabled=true; if(xi===it.a) x.classList.add('ok');});
+        answered++;
+        if(oi===it.a){score++; fb.innerHTML='<b class="t-green">答對了！</b> '+it.e;}
+        else{b.classList.add('no'); fb.innerHTML='<b class="t-red">再想想。</b> '+it.e;}
+        $('score').textContent = score+' / '+QUIZ.length;
+      };
+      opts.appendChild(b);
+    });
+    box.appendChild(d);
+  });
+}
+$('reset').onclick = renderQuiz; renderQuiz();
+
+/* ---------- 導覽列高亮 ---------- */
+const links = [...document.querySelectorAll('nav a')];
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ links.forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+e.target.id)); } });
+},{rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('main section').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
